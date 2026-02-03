@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OddlženieOnline.sk - Osobný bankrot online</title>
+    <title>Čoskoro | OddlženieOnline.sk - Osobný bankrot online</title>
+    <meta name="description" content="Pripravujeme online službu pre osobný bankrot na Slovensku. Jednoducho, rýchlo, profesionálne.">
+    <meta name="robots" content="noindex, nofollow">
     <style>
         * {
             margin: 0;
@@ -19,426 +21,194 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         .container {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
+            border-radius: 30px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
             width: 100%;
-            overflow: hidden;
+            padding: 60px 50px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .header {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #1a202c;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #4a5568;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            text-align: left;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .feature-content p {
+            color: #718096;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .launch-date {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .progress-bar {
-            background: #f3f4f6;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .progress-step {
-            text-align: center;
-            flex: 1;
-            position: relative;
-        }
-
-        .progress-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 15px;
-            right: -50%;
-            width: 100%;
-            height: 3px;
-            background: #e5e7eb;
-            z-index: 0;
-        }
-
-        .progress-step.active:not(:last-child)::after {
-            background: #667eea;
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            color: #9ca3af;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .progress-step.active .step-number {
-            background: #667eea;
-            color: white;
-        }
-
-        .progress-step.completed .step-number {
-            background: #10b981;
-            color: white;
-        }
-
-        .step-label {
-            font-size: 0.75rem;
-            color: #6b7280;
-        }
-
-        .progress-step.active .step-label {
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .step-content {
-            display: none;
-        }
-
-        .step-content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #374151;
-            font-weight: 500;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: space-between;
+            padding: 25px;
+            border-radius: 15px;
             margin-top: 40px;
+            font-size: 1.1rem;
         }
 
-        button {
-            padding: 12px 32px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+        .launch-date strong {
+            font-size: 1.3rem;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .contact {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.95rem;
+        }
+
+        .contact a {
+            color: #667eea;
+            text-decoration: none;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .btn-prev {
-            background: #f3f4f6;
-            color: #6b7280;
-        }
-
-        .btn-prev:hover {
-            background: #e5e7eb;
-        }
-
-        .btn-next {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-next:hover {
-            background: #5568d3;
-        }
-
-        .btn-submit {
-            background: #10b981;
-            color: white;
-        }
-
-        .btn-submit:hover {
-            background: #059669;
-        }
-
-        .info-box {
-            background: #eff6ff;
-            border-left: 4px solid #3b82f6;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .success-message {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .success-message h2 {
-            color: #10b981;
-            margin-bottom: 20px;
+        .contact a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
+            .container {
+                padding: 40px 30px;
             }
 
-            .progress-bar {
-                overflow-x: auto;
+            h1 {
+                font-size: 2rem;
             }
 
-            .step-label {
-                display: none;
+            .subtitle {
+                font-size: 1.1rem;
             }
 
-            .content {
-                padding: 20px;
+            .features {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🏦 OddlženieOnline.sk</h1>
-            <p>Vyplňte formulár pre osobný bankrot</p>
-        </div>
+        <div class="logo">🏦</div>
+        <h1>
+            <span class="gradient-text">OddlženieOnline.sk</span>
+        </h1>
+        <p class="subtitle">
+            Pripravujeme modernú online službu pre osobný bankrot na Slovensku.<br>
+            Jednoducho, rýchlo a profesionálne.
+        </p>
 
-        <div class="progress-bar">
-            <div class="progress-step active" data-step="1">
-                <div class="step-number">1</div>
-                <div class="step-label">Osobné údaje</div>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                    <h3>Online formulár</h3>
+                    <p>Vyplníte pohodlne z domu za 15 minút</p>
+                </div>
             </div>
-            <div class="progress-step" data-step="2">
-                <div class="step-number">2</div>
-                <div class="step-label">Bydlisko</div>
+            <div class="feature">
+                <div class="feature-icon">📄</div>
+                <div class="feature-content">
+                    <h3>Hotové dokumenty</h3>
+                    <p>Profesionálne spracované právnikom</p>
+                </div>
             </div>
-            <div class="progress-step" data-step="3">
-                <div class="step-number">3</div>
-                <div class="step-label">Zamestnanie</div>
-            </div>
-            <div class="progress-step" data-step="4">
-                <div class="step-number">4</div>
-                <div class="step-label">Majetok</div>
-            </div>
-            <div class="progress-step" data-step="5">
-                <div class="step-number">5</div>
-                <div class="step-label">História</div>
-            </div>
-            <div class="progress-step" data-step="6">
-                <div class="step-number">6</div>
-                <div class="step-label">Veritelia</div>
-            </div>
-            <div class="progress-step" data-step="7">
-                <div class="step-number">7</div>
-                <div class="step-label">Kontrola</div>
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <div class="feature-content">
+                    <h3>Fixná cena</h3>
+                    <p>Bez skrytých poplatkov</p>
+                </div>
             </div>
         </div>
 
-        <form id="bankruptcyForm" class="content">
-            <!-- KROK 1: Osobné údaje -->
-            <div class="step-content active" data-step="1">
-                <h2>Osobné údaje</h2>
-                <div class="info-box">
-                    💡 Začneme základnými informáciami o vás
-                </div>
+        <div class="launch-date">
+            📅 Plánované spustenie
+            <strong>Február 2026</strong>
+        </div>
 
-                <div class="form-group">
-                    <label>Meno *</label>
-                    <input type="text" name="meno" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Priezvisko *</label>
-                    <input type="text" name="priezvisko" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Telefón *</label>
-                    <input type="tel" name="telefon" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Rodné číslo *</label>
-                    <input type="text" name="rodneCislo" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Dátum narodenia *</label>
-                    <input type="date" name="datumNarodenia" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Miesto narodenia *</label>
-                    <input type="text" name="miestoNarodenia" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Rodinný stav *</label>
-                    <select name="rodinnyStav" required>
-                        <option value="">Vyberte...</option>
-                        <option value="Slobodný/á">Slobodný/á</option>
-                        <option value="Ženatý/Vydatá">Ženatý/Vydatá</option>
-                        <option value="Rozvedený/á">Rozvedený/á</option>
-                        <option value="Ovdovený/á">Ovdovený/á</option>
-                    </select>
-                </div>
-
-                <div class="button-group">
-                    <button type="button" class="btn-prev" disabled>Späť</button>
-                    <button type="button" class="btn-next">Pokračovať</button>
-                </div>
-            </div>
-
-            <!-- KROK 2-7: Placeholder pre ďalšie kroky -->
-            <div class="step-content" data-step="2">
-                <h2>Bydlisko</h2>
-                <div class="info-box">
-                    🏠 Vaša trvalá adresa
-                </div>
-                <p style="color: #6b7280; margin: 20px 0;">Ďalšie polia budú doplnené...</p>
-                <div class="button-group">
-                    <button type="button" class="btn-prev">Späť</button>
-                    <button type="button" class="btn-next">Pokračovať</button>
-                </div>
-            </div>
-
-            <!-- Placeholder pre kroky 3-7 -->
-            <div class="step-content" data-step="3">
-                <h2>Zamestnanie a príjem</h2>
-                <p style="color: #6b7280; margin: 20px 0;">Budeme dopĺňať...</p>
-                <div class="button-group">
-                    <button type="button" class="btn-prev">Späť</button>
-                    <button type="button" class="btn-next">Pokračovať</button>
-                </div>
-            </div>
-
-            <div class="step-content" data-step="4">
-                <h2>Majetok</h2>
-                <p style="color: #6b7280; margin: 20px 0;">Budeme dopĺňať...</p>
-                <div class="button-group">
-                    <button type="button" class="btn-prev">Späť</button>
-                    <button type="button" class="btn-next">Pokračovať</button>
-                </div>
-            </div>
-
-            <div class="step-content" data-step="5">
-                <h2>História majetku</h2>
-                <p style="color: #6b7280; margin: 20px 0;">Budeme dopĺňať...</p>
-                <div class="button-group">
-                    <button type="button" class="btn-prev">Späť</button>
-                    <button type="button" class="btn-next">Pokračovať</button>
-                </div>
-            </div>
-
-            <div class="step-content" data-step="6">
-                <h2>Veritelia</h2>
-                <p style="color: #6b7280; margin: 20px 0;">Budeme dopĺňať...</p>
-                <div class="button-group">
-                    <button type="button" class="btn-prev">Späť</button>
-                    <button type="button" class="btn-next">Pokračovať</button>
-                </div>
-            </div>
-
-            <div class="step-content" data-step="7">
-                <h2>Kontrola a odoslanie</h2>
-                <p style="color: #6b7280; margin: 20px 0;">Budeme dopĺňať...</p>
-                <div class="button-group">
-                    <button type="button" class="btn-prev">Späť</button>
-                    <button type="submit" class="btn-submit">Odoslať žiadosť</button>
-                </div>
-            </div>
-        </form>
-
-        <div class="success-message" style="display: none;">
-            <h2>✅ Žiadosť odoslaná!</h2>
-            <p>Ďakujeme za vyplnenie formulára. Ozveme sa vám čoskoro.</p>
+        <div class="contact">
+            Máte otázky? Kontaktujte nás na<br>
+            <a href="mailto:info@oddlzenieonline.sk">info@oddlzenieonline.sk</a>
         </div>
     </div>
 
     <script>
-        let currentStep = 1;
-        const totalSteps = 7;
-
-        function updateProgress() {
-            document.querySelectorAll('.progress-step').forEach((step, index) => {
-                const stepNum = index + 1;
-                if (stepNum < currentStep) {
-                    step.classList.add('completed');
-                    step.classList.remove('active');
-                } else if (stepNum === currentStep) {
-                    step.classList.add('active');
-                    step.classList.remove('completed');
-                } else {
-                    step.classList.remove('active', 'completed');
-                }
-            });
-
-            document.querySelectorAll('.step-content').forEach((content, index) => {
-                content.classList.toggle('active', index + 1 === currentStep);
-            });
-        }
-
-        document.querySelectorAll('.btn-next').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (currentStep < totalSteps) {
-                    currentStep++;
-                    updateProgress();
-                }
-            });
-        });
-
-        document.querySelectorAll('.btn-prev').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (currentStep > 1) {
-                    currentStep--;
-                    updateProgress();
-                }
-            });
-        });
-
-        document.getElementById('bankruptcyForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('🚧 Backend integrácia pripravená!\n\nFormulár bude odosielať na:\nhttps://api.oddlzenieonline.sk/api/submit-form');
-        });
-
-        updateProgress();
+        // Coming soon page - no interactive elements
     </script>
 </body>
 </html>
