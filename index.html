@@ -241,9 +241,9 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
 <div class="form-section">
 <div class="form-section-title"><span class="icon">👨‍👩‍👧‍👦</span> Spoločná domácnosť</div>
-<div class="form-row full"><div class="form-group"><label>Manžel/ka, druh/družka</label><input type="text" id="manzel" name="manzel" placeholder="Petra Šupová, 26.06.1978, zamestnaná"><div class="hint">Meno, dátum narodenia, sociálne postavenie</div></div></div>
-<div class="form-row full"><div class="form-group"><label>Deti</label><textarea id="deti" name="deti" rows="3" placeholder="Alexandra Šupová, nar. 5.2.2013&#10;Miroslav Šupa ml., nar. 27.1.2010"></textarea><div class="hint">Každé dieťa na nový riadok</div></div></div>
-<div class="form-row full"><div class="form-group"><label>Iné osoby v domácnosti</label><input type="text" id="ineOsoby" name="ineOsoby" placeholder="–"></div></div>
+<div class="info-box"><span class="info-icon">ℹ️</span><p>Uveďte všetky osoby, s ktorými žijete v spoločnej domácnosti (manžel/ka, deti, iné). Ku každej osobe uveďte sociálne postavenie.</p></div>
+<div id="domacnostList" class="dynamic-list"></div>
+<button type="button" class="btn-add" onclick="addOsobaDomacnost()">+ Pridať osobu v domácnosti</button>
 </div>
 
 <div class="form-section">
@@ -375,7 +375,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <script>
 let currentStep = 1;
 const totalSteps = 7;
-let counters = {praca:1,prijem:1,blizka:1,pozemky:0,stavby:0,byty:0,hnutelne:0,ucty:0,veritelia:0};
+let counters = {praca:1,prijem:1,blizka:1,domacnost:0,pozemky:0,stavby:0,byty:0,hnutelne:0,ucty:0,veritelia:0};
 const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://oddlzenieonline-backend-production.up.railway.app';
 
 // === NAVIGATION ===
@@ -428,6 +428,33 @@ function addDynamic(listId, prefix, label) {
         fields=`<div class="form-row three"><div class="form-group"><label>Meno a priezvisko</label><input type="text" name="blizka_meno_${idx}"></div><div class="form-group"><label>Vzťah</label><input type="text" name="blizka_vztah_${idx}"></div><div class="form-group"><label>Adresa</label><input type="text" name="blizka_adresa_${idx}"></div></div>`;
     }
     list.insertAdjacentHTML('beforeend',`<div class="dynamic-item"><div class="dynamic-item-header"><h4>${label} č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>${fields}</div>`);
+}
+
+// === OSOBA V DOMÁCNOSTI ===
+function addOsobaDomacnost(){
+    const list=document.getElementById('domacnostList');const idx=counters.domacnost++;
+    list.insertAdjacentHTML('beforeend',`<div class="dynamic-item" data-index="${idx}">
+    <div class="dynamic-item-header"><h4>Osoba č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
+    <div class="form-row three">
+        <div class="form-group"><label>Meno a priezvisko</label><input type="text" name="dom_meno_${idx}" placeholder="Petra Šupová"></div>
+        <div class="form-group"><label>Dátum narodenia</label><input type="text" name="dom_datnar_${idx}" placeholder="26.06.1978"></div>
+        <div class="form-group"><label>Vzťah</label><select name="dom_vztah_${idx}"><option value="">— vyberte —</option><option>manžel/ka</option><option>druh/družka</option><option>syn</option><option>dcéra</option><option>rodič</option><option>iné</option></select></div>
+    </div>
+    <div style="margin-top:8px;padding:12px;background:var(--blue-bg);border-radius:8px">
+        <label style="font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:8px;display:block">Sociálne postavenie:</label>
+        <label class="checkbox-group" style="margin-bottom:2px"><input type="checkbox" name="dom_soc_zamestanany_${idx}" value="1"><span>zamestnaný/á</span></label>
+        <label class="checkbox-group" style="margin-bottom:2px"><input type="checkbox" name="dom_soc_szco_${idx}" value="1" onchange="this.closest('.dynamic-item').querySelector('.dom-ico-${idx}').style.display=this.checked?'block':'none'"><span>samostatne zárobkovo činná osoba</span></label>
+        <div class="dom-ico-${idx}" style="display:none;margin:0 0 4px 40px"><label style="font-size:.8rem">IČO:</label><input type="text" name="dom_ico_${idx}" placeholder="12345678" style="max-width:200px"></div>
+        <label class="checkbox-group" style="margin-bottom:2px"><input type="checkbox" name="dom_soc_dochodok_${idx}" value="1" onchange="this.closest('.dynamic-item').querySelector('.dom-doch-${idx}').style.display=this.checked?'block':'none'"><span>poberateľ/-ka dôchodku</span></label>
+        <div class="dom-doch-${idx}" style="display:none;margin:0 0 4px 40px"><label style="font-size:.8rem">druh:</label><input type="text" name="dom_dochodokDruh_${idx}" placeholder="starobný, invalidný..." style="max-width:250px"></div>
+        <label class="checkbox-group" style="margin-bottom:2px"><input type="checkbox" name="dom_soc_nezamestnany_${idx}" value="1"><span>dobrovoľne nezamestnaný/á</span></label>
+        <label class="checkbox-group" style="margin-bottom:2px"><input type="checkbox" name="dom_soc_uchadzac_${idx}" value="1"><span>uchádzač/-ka o zamestnanie</span></label>
+        <label class="checkbox-group" style="margin-bottom:2px"><input type="checkbox" name="dom_soc_davky_${idx}" value="1" onchange="this.closest('.dynamic-item').querySelector('.dom-davky-${idx}').style.display=this.checked?'block':'none'"><span>poberateľ/-ka sociálnych dávok</span></label>
+        <div class="dom-davky-${idx}" style="display:none;margin:0 0 4px 40px"><label style="font-size:.8rem">druh:</label><input type="text" name="dom_davkyDruh_${idx}" placeholder="dávka v hmotnej núdzi..." style="max-width:250px"></div>
+        <label class="checkbox-group" style="margin-bottom:2px"><input type="checkbox" name="dom_soc_ine_${idx}" value="1" onchange="this.closest('.dynamic-item').querySelector('.dom-ine-${idx}').style.display=this.checked?'block':'none'"><span>iné</span></label>
+        <div class="dom-ine-${idx}" style="display:none;margin:0 0 4px 40px"><label style="font-size:.8rem">uveďte:</label><input type="text" name="dom_ine_${idx}" placeholder="študent, na materskej..." style="max-width:250px"></div>
+    </div>
+    </div>`);
 }
 
 // === POZEMKY ===
@@ -498,7 +525,7 @@ function saveProgress(){
         data.forEach((v,k)=>{ if(obj[k]){if(!Array.isArray(obj[k]))obj[k]=[obj[k]];obj[k].push(v);} else obj[k]=v; });
         obj._step=currentStep; obj._counters=counters;
         obj._dynamicHTML={};
-        ['pozemkyList','stavbyList','bytyList','hnutelneList','uctyList','veriteliaList','histPozemkyList','histStavbyList','histBytyList','histHnutelneList'].forEach(id=>{
+        ['domacnostList','pozemkyList','stavbyList','bytyList','hnutelneList','uctyList','veriteliaList','histPozemkyList','histStavbyList','histBytyList','histHnutelneList'].forEach(id=>{
             const el=document.getElementById(id);if(el)obj._dynamicHTML[id]=el.innerHTML;
         });
         localStorage.setItem('oddlzenie_form',JSON.stringify(obj));
@@ -544,7 +571,7 @@ function buildSummary(){
     <div class="summary-row"><span class="summary-label">Odbor / Škola</span><span class="summary-value">${g('vzdelanieOdbor')} / ${g('vzdelanieSkaola')}</span></div></div>`;
     // Situácia
     html+=`<div class="summary-section"><h3>Životná situácia <button class="edit-btn" onclick="goToStep(3)">Upraviť</button></h3>
-    <div class="summary-row"><span class="summary-label">Manžel/ka</span><span class="summary-value">${g('manzel')}</span></div>
+    <div class="summary-row"><span class="summary-label">Osoby v domácnosti</span><span class="summary-value">${document.querySelectorAll('#domacnostList .dynamic-item').length}</span></div>
     <div class="summary-row"><span class="summary-label">Vznik dlhov</span><span class="summary-value" style="max-width:70%;font-size:.82rem">${g('vznikDlhov').substring(0,150)}...</span></div></div>`;
     // Majetok
     const pocetMaj=document.querySelectorAll('#pozemkyList .dynamic-item,#stavbyList .dynamic-item,#bytyList .dynamic-item,#hnutelneList .dynamic-item,#uctyList .dynamic-item').length;
@@ -617,10 +644,9 @@ function autoFill(){
         vydaj_deti:'100', vydaj_poistne:'10', vydaj_cestovne:'10', vydaj_dlhy:'500',
         // Dlhy
         vznikDlhov:'Dlhy vznikli v dôsledku neúspešného podnikania v roku 2018, kedy som musel zatvoriť prevádzku a zostali mi nesplatené záväzky voči dodávateľom a banke.',
-        // Rodina
-        manzel:'Petra Šupová, 26.06.1978, zamestnaná',
-        deti:'Alexandra Šupová, nar. 5.2.2013\nMiroslav Šupa ml., nar. 27.1.2010',
-        ineOsoby:'–',
+        // Rodina - domácnosť
+        deti:'',
+        ineOsoby:'',
         // Blízke osoby
         blizka_meno_0:'Katarína Šupová', blizka_vztah_0:'sestra', blizka_adresa_0:'Kmeťkova 30, Nitra',
         // Účasti
@@ -640,6 +666,30 @@ function autoFill(){
     // Checkboxy
     const cb=document.querySelector('[name="soc_szco"]');if(cb){cb.checked=true;document.getElementById('soc_szco_ico').style.display='block';}
     const ob=document.getElementById('uplatnujeObydlie');if(ob){ob.checked=true;document.getElementById('obydlieDetail').style.display='block';}
+
+    // Domácnosť - manželka
+    addOsobaDomacnost();
+    setTimeout(()=>{
+        const f={dom_meno_0:'Petra Šupová',dom_datnar_0:'26.06.1978',dom_vztah_0:'manžel/ka'};
+        Object.keys(f).forEach(k=>{const el=document.querySelector('[name="'+k+'"]');if(el)el.value=f[k];});
+        const cb=document.querySelector('[name="dom_soc_zamestanany_0"]');if(cb)cb.checked=true;
+    },100);
+    // Domácnosť - dcéra
+    addOsobaDomacnost();
+    setTimeout(()=>{
+        const f={dom_meno_1:'Alexandra Šupová',dom_datnar_1:'05.02.2013',dom_vztah_1:'dcéra'};
+        Object.keys(f).forEach(k=>{const el=document.querySelector('[name="'+k+'"]');if(el)el.value=f[k];});
+        const cbi=document.querySelector('[name="dom_soc_ine_1"]');if(cbi){cbi.checked=true;cbi.dispatchEvent(new Event('change'));}
+        setTimeout(()=>{const el=document.querySelector('[name="dom_ine_1"]');if(el)el.value='študentka';},50);
+    },150);
+    // Domácnosť - syn
+    addOsobaDomacnost();
+    setTimeout(()=>{
+        const f={dom_meno_2:'Miroslav Šupa ml.',dom_datnar_2:'27.01.2010',dom_vztah_2:'syn'};
+        Object.keys(f).forEach(k=>{const el=document.querySelector('[name="'+k+'"]');if(el)el.value=f[k];});
+        const cbi=document.querySelector('[name="dom_soc_ine_2"]');if(cbi){cbi.checked=true;cbi.dispatchEvent(new Event('change'));}
+        setTimeout(()=>{const el=document.querySelector('[name="dom_ine_2"]');if(el)el.value='študent';},50);
+    },200);
 
     // Pridaj prácu č.2
     addDynamic('pracovneList','praca','Zamestnanie');
