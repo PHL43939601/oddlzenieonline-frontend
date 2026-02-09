@@ -470,7 +470,7 @@ function addHnutelna(listId){
     list.insertAdjacentHTML('beforeend',`<div class="dynamic-item"><div class="dynamic-item-header"><h4>Hnuteľná vec č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
     <div class="form-row full"><div class="form-group"><label>Popis</label><input type="text" name="${p}_popis_${idx}" placeholder="Audi A4 Avant, rok výroby 2015"></div></div>
     <div class="form-row"><div class="form-group"><label>VIN / výrobné č.</label><input type="text" name="${p}_vin_${idx}" placeholder="WAUZZZ8K6FA123456"></div><div class="form-group"><label>ŠPZ / evidenčné č.</label><input type="text" name="${p}_spz_${idx}" placeholder="NR232FL"></div></div>
-    <div class="form-row"><div class="form-group"><label>Kde sa nachádza</label><input type="text" name="${p}_kde_${idx}" placeholder="Nitra"></div><div class="form-group"><label>Hodnota (€)</label><input type="number" name="${p}_hodnota_${idx}" placeholder="12000"></div></div></div>`);
+    <div class="form-row"><div class="form-group"><label>Kde sa nachádza</label><input type="text" name="${p}_kde_${idx}" placeholder="Svätourbanská 26, 949 01 Nitra"></div><div class="form-group"><label>Hodnota (€)</label><input type="number" name="${p}_hodnota_${idx}" placeholder="12000"></div></div></div>`);
 }
 
 // === ÚČTY ===
@@ -679,7 +679,7 @@ function autoFill(){
     // Hnuteľná vec
     addHnutelna('hnutelneList');
     setTimeout(()=>{
-        const f={h_popis_0:'Audi A4 Avant, rok výroby 2015',h_vin_0:'WAUZZZ8K6FA123456',h_spz_0:'NR232FL',h_kde_0:'Nitra',h_hodnota_0:'12000'};
+        const f={h_popis_0:'Audi A4 Avant, rok výroby 2015',h_vin_0:'WAUZZZ8K6FA123456',h_spz_0:'NR232FL',h_kde_0:'Svätourbanská 26, 949 01 Nitra',h_hodnota_0:'12000'};
         Object.keys(f).forEach(k=>{const el=document.querySelector('[name="'+k+'"]');if(el)el.value=f[k];});
     },100);
 
