@@ -301,14 +301,22 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-row full"><div class="form-group"><label>Súdne spory súvisiace s majetkom</label><textarea id="sudneSpory" name="sudneSpory" rows="2" placeholder="nemám"></textarea></div></div></div>
 
 <div class="form-section"><div class="form-section-title"><span class="icon">🏡</span> Obydlie – nepostihnuteľná hodnota</div>
-<label class="checkbox-group"><input type="checkbox" id="uplatnujeObydlie" name="uplatnujeObydlie" value="1" onchange="document.getElementById('obydlieDetail').style.display=this.checked?'block':'none'"><span>Uplatňujem si nepostihnuteľnú hodnotu obydlia</span></label>
-<div id="obydlieDetail" style="display:none;margin-top:12px"><div class="form-row full"><div class="form-group"><label>Na obývateľnú vec uvedenú ako</label><input type="text" id="obydlieVec" name="obydlieVec" placeholder="Byt č. 1, Chrenová"></div></div></div></div>
+<div class="info-box"><span class="info-icon">ℹ️</span><p>Podľa § 167h zákona č. 7/2005 Z.z. si dlžník môže uplatniť nepostihnuteľnú hodnotu obydlia. Nehnuteľnosť menšej hodnoty (do 5 000 €) sa nepovažuje za obydlie (§ 48b vyhl. 665/2005 Z.z.).</p></div>
+<div style="margin-bottom:12px">
+<label class="checkbox-group"><input type="radio" name="obydlieTyp" value="nevlastnim" onchange="document.getElementById('obydlieDetailUplatnujem').style.display='none'" style="width:18px;height:18px;accent-color:var(--blue)"><span>Vyhlasujem, že <strong>nevlastním</strong> obývateľnú vec, ktorá by mohla byť v zozname majetku označená za obydlie.</span></label>
+<label class="checkbox-group"><input type="radio" name="obydlieTyp" value="uplatnujem" onchange="document.getElementById('obydlieDetailUplatnujem').style.display='block'" style="width:18px;height:18px;accent-color:var(--blue)"><span><strong>Uplatňujem si</strong> nepostihnuteľnú hodnotu obydlia na obývateľnú vec (obydlie) uvedenú v zozname majetku.</span></label>
+</div>
+<div id="obydlieDetailUplatnujem" style="display:none">
+<div class="form-row"><div class="form-group"><label>Tabuľka (typ majetku)</label><select id="obydlieTypMajetku" name="obydlieTypMajetku"><option value="">— vyberte —</option><option value="Pozemok">Pozemok</option><option value="Stavba">Stavba</option><option value="Byt a nebytový priestor">Byt a nebytový priestor</option></select></div>
+<div class="form-group"><label>Číslo položky</label><input type="text" id="obydliePolozka" name="obydliePolozka" placeholder="1"></div></div>
+<div class="form-row full"><div class="form-group"><label>Označené obydlie je v bezpodielovom spoluvlastníctve manželov?</label><select id="obydlieBSM" name="obydlieBSM"><option value="Nie">Nie</option><option value="Áno">Áno</option></select></div></div>
+</div></div>
 </div>
 
 <!-- KROK 5: HISTÓRIA MAJETKU -->
 <div class="step" data-step="5">
 <div class="step-header"><h2>Majetok väčšej hodnoty za posledné 3 roky</h2><p>Majetok, ktorý ste vlastnili v posledných troch rokoch a už nevlastníte.</p></div>
-<div class="warning-box"><span class="info-icon">⚠️</span><p>Ak ste v posledných 3 rokoch nepreviedli žiaden majetok, môžete tento krok preskočiť.</p></div>
+<div class="warning-box"><span class="info-icon">⚠️</span><p>Uvádzajte len majetok <strong>väčšej hodnoty</strong> (nad 2 000 €) podľa § 48a vyhl. 665/2005 Z.z. Ak ste v posledných 3 rokoch nepreviedli žiaden takýto majetok, môžete tento krok preskočiť.</p></div>
 
 <div class="form-section"><div class="form-section-title"><span class="icon">🌍</span> Pozemky (hist.)</div>
 <div id="histPozemkyList" class="dynamic-list"></div>
@@ -577,7 +585,7 @@ function buildSummary(){
     const pocetMaj=document.querySelectorAll('#pozemkyList .dynamic-item,#stavbyList .dynamic-item,#bytyList .dynamic-item,#hnutelneList .dynamic-item,#uctyList .dynamic-item').length;
     html+=`<div class="summary-section"><h3>Majetok <button class="edit-btn" onclick="goToStep(4)">Upraviť</button></h3>
     <div class="summary-row"><span class="summary-label">Počet položiek majetku</span><span class="summary-value">${pocetMaj}</span></div>
-    <div class="summary-row"><span class="summary-label">Obydlie</span><span class="summary-value">${gc('uplatnujeObydlie')==='Áno'?g('obydlieVec'):'Neuplatňujem'}</span></div></div>`;
+    <div class="summary-row"><span class="summary-label">Obydlie</span><span class="summary-value">${document.querySelector('[name="obydlieTyp"][value="uplatnujem"]')?.checked ? g('obydlieTypMajetku')+', položka '+g('obydliePolozka') : 'Nevlastním / Neuplatňujem'}</span></div></div>`;
     // Veritelia
     const pocetVer=document.querySelectorAll('#veriteliaList .dynamic-item').length;
     html+=`<div class="summary-section"><h3>Veritelia <button class="edit-btn" onclick="goToStep(6)">Upraviť</button></h3>
@@ -654,7 +662,8 @@ function autoFill(){
         blizkeUcasti:'Petra Šupová (manželka) – ABC Trading s.r.o., IČO: 12345678, Bratislava',
         // Majetok - iné
         ineMajetkoveHodnoty:'zlato 1 unca a striebro 100 uncí',
-        zabezpPrava:'(žiadne)', sudneSpory:'nemám', obydlieVec:'Byt č. 1, Chrenová',
+        zabezpPrava:'(žiadne)', sudneSpory:'nemám',
+        obydlieTypMajetku:'Byt a nebytový priestor', obydliePolozka:'1', obydlieBSM:'Nie',
         // História
         histIne:'(žiadne)', histZabezp:'(žiadne)', histSpory:'(žiadne)',
     };
@@ -665,7 +674,7 @@ function autoFill(){
     });
     // Checkboxy
     const cb=document.querySelector('[name="soc_szco"]');if(cb){cb.checked=true;document.getElementById('soc_szco_ico').style.display='block';}
-    const ob=document.getElementById('uplatnujeObydlie');if(ob){ob.checked=true;document.getElementById('obydlieDetail').style.display='block';}
+    const obRadio=document.querySelector('[name="obydlieTyp"][value="uplatnujem"]');if(obRadio){obRadio.checked=true;document.getElementById('obydlieDetailUplatnujem').style.display='block';}
 
     // Domácnosť - manželka
     addOsobaDomacnost();
