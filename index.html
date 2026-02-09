@@ -300,16 +300,15 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-row full"><div class="form-group"><label>Zabezpečovacie práva k majetku</label><textarea id="zabezpPrava" name="zabezpPrava" rows="2" placeholder="(žiadne)"></textarea></div></div>
 <div class="form-row full"><div class="form-group"><label>Súdne spory súvisiace s majetkom</label><textarea id="sudneSpory" name="sudneSpory" rows="2" placeholder="nemám"></textarea></div></div></div>
 
-<div class="form-section"><div class="form-section-title"><span class="icon">🏡</span> Obydlie – nepostihnuteľná hodnota</div>
-<div class="info-box"><span class="info-icon">ℹ️</span><p>Podľa § 167h zákona č. 7/2005 Z.z. si dlžník môže uplatniť nepostihnuteľnú hodnotu obydlia. Nehnuteľnosť menšej hodnoty (do 5 000 €) sa nepovažuje za obydlie (§ 48b vyhl. 665/2005 Z.z.).</p></div>
+<div class="form-section"><div class="form-section-title"><span class="icon">🏡</span> Obydlie – nepostihnuteľná hodnota obydlia dlžníka</div>
+<div class="info-box"><span class="info-icon">ℹ️</span><p>Podľa § 166d zákona č. 7/2005 Z.z. si dlžník môže uplatniť nepostihnuteľnú hodnotu obydlia (10 000 €) na jednu obývateľnú vec, ktorú označí ako svoje obydlie. Ak je obydlie v BSM, každý z manželov má nárok na 10 000 € (spolu 20 000 €). Podmienkou je vlastníctvo obývateľnej veci — ak nebývate vo vlastnom, nepostihnuteľnú hodnotu obydlia si uplatniť nemôžete.</p></div>
 <div style="margin-bottom:12px">
-<label class="checkbox-group"><input type="radio" name="obydlieTyp" value="nevlastnim" onchange="document.getElementById('obydlieDetailUplatnujem').style.display='none'" style="width:18px;height:18px;accent-color:var(--blue)"><span>Vyhlasujem, že <strong>nevlastním</strong> obývateľnú vec, ktorá by mohla byť v zozname majetku označená za obydlie.</span></label>
-<label class="checkbox-group"><input type="radio" name="obydlieTyp" value="uplatnujem" onchange="document.getElementById('obydlieDetailUplatnujem').style.display='block'" style="width:18px;height:18px;accent-color:var(--blue)"><span><strong>Uplatňujem si</strong> nepostihnuteľnú hodnotu obydlia na obývateľnú vec (obydlie) uvedenú v zozname majetku.</span></label>
+<label class="checkbox-group"><input type="radio" name="obydlieTyp" value="nevlastnim" checked onchange="document.getElementById('obydlieDetailUplatnujem').style.display='none'" style="width:18px;height:18px;accent-color:var(--blue)"><span>Vyhlasujem, že <strong>nevlastním</strong> obývateľnú vec, ktorá by mohla byť v zozname majetku označená za obydlie.</span></label>
+<label class="checkbox-group"><input type="radio" name="obydlieTyp" value="uplatnujem" onchange="document.getElementById('obydlieDetailUplatnujem').style.display='block';buildObydlieSelect()" style="width:18px;height:18px;accent-color:var(--blue)"><span><strong>Uplatňujem si</strong> nepostihnuteľnú hodnotu obydlia na obývateľnú vec (obydlie) uvedenú v zozname majetku.</span></label>
 </div>
 <div id="obydlieDetailUplatnujem" style="display:none">
-<div class="form-row"><div class="form-group"><label>Tabuľka (typ majetku)</label><select id="obydlieTypMajetku" name="obydlieTypMajetku"><option value="">— vyberte —</option><option value="Pozemok">Pozemok</option><option value="Stavba">Stavba</option><option value="Byt a nebytový priestor">Byt a nebytový priestor</option></select></div>
-<div class="form-group"><label>Číslo položky</label><input type="text" id="obydliePolozka" name="obydliePolozka" placeholder="1"></div></div>
-<div class="form-row full"><div class="form-group"><label>Označené obydlie je v bezpodielovom spoluvlastníctve manželov?</label><select id="obydlieBSM" name="obydlieBSM"><option value="Nie">Nie</option><option value="Áno">Áno</option></select></div></div>
+<div class="form-row full"><div class="form-group"><label>Obývateľná vec zo zoznamu majetku <span class="required">*</span></label><select id="obydlieVyber" name="obydlieVyber" style="font-size:.88rem"><option value="">— najprv vyplňte majetok v krokoch vyššie —</option></select><div class="hint">Zoznam sa automaticky naplní z majetku, ktorý ste uviedli (stavby, byty, hnuteľné veci)</div></div></div>
+<div class="form-row full"><div class="form-group"><label>Označené obydlie je v bezpodielovom spoluvlastníctve manželov?</label><select id="obydlieBSM" name="obydlieBSM"><option value="Nie">Nie — nepostihnuteľná hodnota obydlia je 10 000 €</option><option value="Áno">Áno — nepostihnuteľná hodnota obydlia je 20 000 € (10 000 € pre každého manžela)</option></select></div></div>
 </div></div>
 </div>
 
@@ -436,6 +435,37 @@ function addDynamic(listId, prefix, label) {
         fields=`<div class="form-row three"><div class="form-group"><label>Meno a priezvisko</label><input type="text" name="blizka_meno_${idx}"></div><div class="form-group"><label>Vzťah</label><input type="text" name="blizka_vztah_${idx}"></div><div class="form-group"><label>Adresa</label><input type="text" name="blizka_adresa_${idx}"></div></div>`;
     }
     list.insertAdjacentHTML('beforeend',`<div class="dynamic-item"><div class="dynamic-item-header"><h4>${label} č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>${fields}</div>`);
+}
+
+// === OBYDLIE SELECT ===
+function buildObydlieSelect(){
+    const sel=document.getElementById('obydlieVyber');
+    const prev=sel.value;
+    sel.innerHTML='<option value="">— vyberte obývateľnú vec —</option>';
+    // Stavby
+    document.querySelectorAll('#stavbyList .dynamic-item').forEach((item,i)=>{
+        const popis=item.querySelector('[name^="s_popis_"]');
+        const obec=item.querySelector('[name^="s_obec_"]');
+        const lv=item.querySelector('[name^="s_lv_"]');
+        const label=`Stavba č. ${i+1}: ${popis?popis.value:''}, ${obec?obec.value:''} (LV ${lv?lv.value:''})`;
+        sel.insertAdjacentHTML('beforeend',`<option value="Stavba|${i+1}|${label}">${label}</option>`);
+    });
+    // Byty
+    document.querySelectorAll('#bytyList .dynamic-item').forEach((item,i)=>{
+        const popisBytu=item.querySelector('[name^="b_popisBytu_"]');
+        const obec=item.querySelector('[name^="b_obec_"]');
+        const lv=item.querySelector('[name^="b_lv_"]');
+        const cislo=item.querySelector('[name^="b_cislo_"]');
+        const label=`Byt č. ${i+1}: ${popisBytu?popisBytu.value:''}, byt č. ${cislo?cislo.value:''}, ${obec?obec.value:''} (LV ${lv?lv.value:''})`;
+        sel.insertAdjacentHTML('beforeend',`<option value="Byt|${i+1}|${label}">${label}</option>`);
+    });
+    // Hnuteľné veci (karavan, maringotka...)
+    document.querySelectorAll('#hnutelneList .dynamic-item').forEach((item,i)=>{
+        const popis=item.querySelector('[name^="h_popis_"]');
+        const label=`Hnuteľná vec č. ${i+1}: ${popis?popis.value:''}`;
+        sel.insertAdjacentHTML('beforeend',`<option value="Hnuteľná vec|${i+1}|${label}">${label}</option>`);
+    });
+    if(prev){sel.value=prev;}
 }
 
 // === OSOBA V DOMÁCNOSTI ===
@@ -585,7 +615,7 @@ function buildSummary(){
     const pocetMaj=document.querySelectorAll('#pozemkyList .dynamic-item,#stavbyList .dynamic-item,#bytyList .dynamic-item,#hnutelneList .dynamic-item,#uctyList .dynamic-item').length;
     html+=`<div class="summary-section"><h3>Majetok <button class="edit-btn" onclick="goToStep(4)">Upraviť</button></h3>
     <div class="summary-row"><span class="summary-label">Počet položiek majetku</span><span class="summary-value">${pocetMaj}</span></div>
-    <div class="summary-row"><span class="summary-label">Obydlie</span><span class="summary-value">${document.querySelector('[name="obydlieTyp"][value="uplatnujem"]')?.checked ? g('obydlieTypMajetku')+', položka '+g('obydliePolozka') : 'Nevlastním / Neuplatňujem'}</span></div></div>`;
+    <div class="summary-row"><span class="summary-label">Obydlie</span><span class="summary-value">${document.querySelector('[name="obydlieTyp"][value="uplatnujem"]')?.checked ? (document.getElementById('obydlieVyber').selectedOptions[0]?.text||'—') : 'Nevlastním obývateľnú vec'}</span></div></div>`;
     // Veritelia
     const pocetVer=document.querySelectorAll('#veriteliaList .dynamic-item').length;
     html+=`<div class="summary-section"><h3>Veritelia <button class="edit-btn" onclick="goToStep(6)">Upraviť</button></h3>
@@ -663,7 +693,7 @@ function autoFill(){
         // Majetok - iné
         ineMajetkoveHodnoty:'zlato 1 unca a striebro 100 uncí',
         zabezpPrava:'(žiadne)', sudneSpory:'nemám',
-        obydlieTypMajetku:'Byt a nebytový priestor', obydliePolozka:'1', obydlieBSM:'Nie',
+        obydlieBSM:'Nie',
         // História
         histIne:'(žiadne)', histZabezp:'(žiadne)', histSpory:'(žiadne)',
     };
@@ -675,6 +705,8 @@ function autoFill(){
     // Checkboxy
     const cb=document.querySelector('[name="soc_szco"]');if(cb){cb.checked=true;document.getElementById('soc_szco_ico').style.display='block';}
     const obRadio=document.querySelector('[name="obydlieTyp"][value="uplatnujem"]');if(obRadio){obRadio.checked=true;document.getElementById('obydlieDetailUplatnujem').style.display='block';}
+    // Build obydlie select after all property is added (delay to wait for DOM)
+    setTimeout(()=>{buildObydlieSelect();const sel=document.getElementById('obydlieVyber');if(sel&&sel.options.length>1)sel.selectedIndex=2;},300);
 
     // Domácnosť - manželka
     addOsobaDomacnost();
