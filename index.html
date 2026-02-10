@@ -482,5 +482,19 @@ footer{background:var(--navy);padding:40px 24px;border-top:1px solid rgba(197,16
 </footer>
 
 <!-- Scroll animations -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const obs=new Inters
+<script>
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.animate').forEach(el=>obs.observe(el));
+
+// Mobile nav toggle
+const nav=document.querySelector('.nav-links');
+document.querySelector('.nav-inner')?.addEventListener('click',function(e){if(e.target.closest('.nav-logo'))return;if(window.innerWidth<=768){nav.classList.toggle('active')}});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',function(){const item=this.parentElement;const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}));
+</script>
+</body>
+</html>
