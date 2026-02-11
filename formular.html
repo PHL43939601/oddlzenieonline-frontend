@@ -108,7 +108,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-section-title"><span class="icon">👤</span> Identifikácia</div>
 <div class="form-row three">
 <div class="form-group"><label>Titul</label><select id="titul" name="titul"><option value="">— bez titulu —</option><option value="Bc.">Bc.</option><option value="Mgr.">Mgr.</option><option value="Ing.">Ing.</option><option value="JUDr.">JUDr.</option><option value="MUDr.">MUDr.</option><option value="PhDr.">PhDr.</option><option value="PhD.">PhD.</option></select></div>
-<div class="form-group"><label>Meno <span class="required">*</span></label><input type="text" id="meno" name="meno" required placeholder="Ján"><div class="error-msg">Vyplňte meno</div></div>
+<div class="form-group"><label>Meno <span class="required">*</span></label><input type="text" id="meno" name="meno" required placeholder="Miroslav"><div class="error-msg">Vyplňte meno</div></div>
 <div class="form-group"><label>Priezvisko <span class="required">*</span></label><input type="text" id="priezvisko" name="priezvisko" required placeholder="Novák"><div class="error-msg">Vyplňte priezvisko</div></div>
 </div>
 <div class="form-row">
@@ -128,7 +128,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-group"><label>Číslo <span class="required">*</span></label><input type="text" id="cisloDomu" name="cisloDomu" required placeholder="26"><div class="error-msg">Vyplňte číslo</div></div>
 </div>
 <div class="form-row three">
-<div class="form-group"><label>Obec <span class="required">*</span></label><input type="text" id="obec" name="obec" required placeholder=""><div class="error-msg">Vyplňte obec</div></div>
+<div class="form-group"><label>Obec <span class="required">*</span></label><input type="text" id="obec" name="obec" required placeholder="Nitra"><div class="error-msg">Vyplňte obec</div></div>
 <div class="form-group"><label>PSČ <span class="required">*</span></label><input type="text" id="psc" name="psc" required placeholder="94901" maxlength="6"><div class="error-msg">Vyplňte PSČ</div></div>
 <div class="form-group"><label>Kraj</label><select id="kraj" name="kraj"><option value="">— vyberte —</option><option>Bratislavský</option><option>Trnavský</option><option>Trenčiansky</option><option>Nitriansky</option><option>Žilinský</option><option>Banskobystrický</option><option>Prešovský</option><option>Košický</option></select></div>
 </div>
@@ -137,7 +137,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-section">
 <div class="form-section-title"><span class="icon">📞</span> Kontaktné údaje</div>
 <div class="form-row">
-<div class="form-group"><label>Telefón <span class="required">*</span></label><input type="tel" id="telefon" name="telefon" required placeholder="+421900000000"><div class="error-msg">Vyplňte telefón</div></div>
+<div class="form-group"><label>Telefón <span class="required">*</span></label><input type="tel" id="telefon" name="telefon" required placeholder="+421 900 123 456"><div class="error-msg">Vyplňte telefón</div></div>
 <div class="form-group"><label>E-mail <span class="required">*</span></label><input type="email" id="email" name="email" required placeholder="meno@email.sk"><div class="error-msg">Vyplňte e-mail</div></div>
 </div>
 </div>
@@ -184,7 +184,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-row three">
 <div class="form-group"><label>Od</label><input type="text" name="praca_od_0" placeholder="01/2001"></div>
 <div class="form-group"><label>Do</label><input type="text" name="praca_do_0" placeholder="12/2001 alebo doteraz"></div>
-<div class="form-group"><label>Pozícia</label><input type="text" name="praca_pozicia_0" placeholder="Pozícia..."></div>
+<div class="form-group"><label>Pozícia</label><input type="text" name="praca_pozicia_0" placeholder="SZČO, exekútor..."></div>
 </div>
 <div class="form-row full"><div class="form-group"><label>Zamestnávateľ</label><input type="text" name="praca_zamestnavatel_0" placeholder="Názov firmy alebo SZČO"></div></div>
 </div>
@@ -221,7 +221,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-section-title"><span class="icon">💰</span> Moje príjmy</div>
 <div id="prijmyList" class="dynamic-list">
 <div class="dynamic-item" data-index="0">
-<div class="form-row"><div class="form-group"><label>Suma (€/mesiac)</label><input type="number" min="0" step="1" name="prijem_suma_0" placeholder="0"></div><div class="form-group"><label>Zdroj</label><input type="text" name="prijem_zdroj_0" placeholder="mzda, dôchodok..."></div></div>
+<div class="form-row"><div class="form-group"><label>Suma (€/mesiac)</label><input type="number" min="0" step="1" name="prijem_suma_0" placeholder="3000"></div><div class="form-group"><label>Zdroj</label><input type="text" name="prijem_zdroj_0" placeholder="mzda, dôchodok..."></div></div>
 </div></div>
 <button type="button" class="btn-add" onclick="addDynamic('prijmyList','prijem','Príjem')">+ Pridať príjem</button>
 </div>
@@ -254,7 +254,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-row three">
 <div class="form-group"><label>Meno a priezvisko</label><input type="text" name="blizka_meno_0" placeholder="Eva Nováková"></div>
 <div class="form-group"><label>Vzťah</label><input type="text" name="blizka_vztah_0" placeholder="sestra"></div>
-<div class="form-group"><label>Adresa</label><input type="text" name="blizka_adresa_0" placeholder="Dlhá 15, Bratislava"></div>
+<div class="form-group"><label>Adresa</label><input type="text" name="blizka_adresa_0" placeholder="Kmeťkova 30, Nitra"></div>
 </div></div>
 </div>
 <button type="button" class="btn-add" onclick="addDynamic('blizkeOsobyList','blizka','Blízka osoba')">+ Pridať osobu</button>
@@ -263,8 +263,8 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="form-section">
 <div class="form-section-title"><span class="icon">🏢</span> Kvalifikované účasti v právnických osobách</div>
 <div class="info-box"><span class="info-icon">ℹ️</span><p>Právnické osoby, v ktorých máte vy alebo blízke osoby podiel aspoň 5 %.</p></div>
-<div class="form-row full"><div class="form-group"><label>a) Moje účasti</label><textarea id="mojeUcasti" name="mojeUcasti" rows="2" placeholder="ABC s.r.o., IČO: 12345678, Bratislava"></textarea></div></div>
-<div class="form-row full"><div class="form-group"><label>b) Účasti blízkych osôb</label><textarea id="blizkeUcasti" name="blizkeUcasti" rows="2" placeholder="Jana Nováková – XYZ s.r.o., IČO: 87654321, Košice"></textarea></div></div>
+<div class="form-row full"><div class="form-group"><label>a) Moje účasti</label><textarea id="mojeUcasti" name="mojeUcasti" rows="2" placeholder="Nová nitrianska spoločnosť, s.r.o., IČO: 36542997, Nitra"></textarea></div></div>
+<div class="form-row full"><div class="form-group"><label>b) Účasti blízkych osôb</label><textarea id="blizkeUcasti" name="blizkeUcasti" rows="2" placeholder="Jana Nováková – XYZ s.r.o., IČO: 12345678, Bratislava"></textarea></div></div>
 </div>
 </div>
 
@@ -372,7 +372,6 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="nav-buttons" id="navButtons"><div class="nav-inner">
 <button type="button" class="btn btn-back" id="btnBack" onclick="prevStep()" style="visibility:hidden">← Späť</button>
 <button type="button" class="btn btn-save" onclick="saveProgress()">Uložiť rozpracované</button>
-
 <button type="button" class="btn btn-next" id="btnNext" onclick="nextStep()">Ďalej →</button>
 </div></div>
 
@@ -486,7 +485,7 @@ function addOsobaDomacnost(){
     <div class="dynamic-item-header"><h4>Osoba č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
     <div class="form-row three">
         <div class="form-group"><label>Meno a priezvisko</label><input type="text" name="dom_meno_${idx}" placeholder="Jana Nováková"></div>
-        <div class="form-group"><label>Dátum narodenia</label><input type="text" name="dom_datnar_${idx}" placeholder="DD.MM.RRRR"></div>
+        <div class="form-group"><label>Dátum narodenia</label><input type="text" name="dom_datnar_${idx}" placeholder="26.06.1978"></div>
         <div class="form-group"><label>Vzťah</label><select name="dom_vztah_${idx}"><option value="">— vyberte —</option><option>manžel/ka</option><option>druh/družka</option><option>syn</option><option>dcéra</option><option>rodič</option><option>iné</option></select></div>
     </div>
     <div style="margin-top:8px;padding:12px;background:var(--blue-bg);border-radius:8px">
@@ -510,8 +509,8 @@ function addOsobaDomacnost(){
 function addPozemok(listId){
     const list=document.getElementById(listId);const idx=counters.pozemky++;const p=listId.includes('hist')?'hp':'p';const minH=listId.includes('hist')?'min="2001"':'min="0"';
     list.insertAdjacentHTML('beforeend',`<div class="dynamic-item"><div class="dynamic-item-header"><h4>Pozemok č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
-    <div class="form-row"><div class="form-group"><label>LV č.</label><input type="text" name="${p}_lv_${idx}" placeholder=""></div><div class="form-group"><label>Obec</label><input type="text" name="${p}_obec_${idx}" placeholder=""></div></div>
-    <div class="form-row"><div class="form-group"><label>Katastrálne územie</label><input type="text" name="${p}_ku_${idx}" placeholder=""></div><div class="form-group"><label>Parcela č.</label><input type="text" name="${p}_parcela_${idx}" placeholder="" style="display:inline-block;width:60%"><select name="${p}_register_${idx}" style="display:inline-block;width:38%;margin-left:2%"><option value="C">register C</option><option value="E">register E</option></select></div></div>
+    <div class="form-row"><div class="form-group"><label>LV č.</label><input type="text" name="${p}_lv_${idx}" placeholder="1477"></div><div class="form-group"><label>Obec</label><input type="text" name="${p}_obec_${idx}" placeholder="Nitra"></div></div>
+    <div class="form-row"><div class="form-group"><label>Katastrálne územie</label><input type="text" name="${p}_ku_${idx}" placeholder="Nitra"></div><div class="form-group"><label>Parcela č.</label><input type="text" name="${p}_parcela_${idx}" placeholder="174/8" style="display:inline-block;width:60%"><select name="${p}_register_${idx}" style="display:inline-block;width:38%;margin-left:2%"><option value="C">register C</option><option value="E">register E</option></select></div></div>
     <div class="form-row three"><div class="form-group"><label>Výmera (m²)</label><input type="number" min="0" step="1" name="${p}_vymera_${idx}" placeholder="1000"></div><div class="form-group"><label>Druh pozemku</label><select name="${p}_druh_${idx}"><option value="">— vyberte —</option><option>orná pôda</option><option>chmeľnica</option><option>vinica</option><option>záhrada</option><option>ovocný sad</option><option>trvalý trávny porast</option><option>lesný pozemok</option><option>vodná plocha</option><option>zastavaná plocha a nádvorie</option><option>ostatná plocha</option><option>ostatná poľnohospodárska plocha</option></select></div><div class="form-group"><label>Hodnota (€)</label><input type="number" ${minH} step="1" name="${p}_hodnota_${idx}" placeholder="1000"></div></div>
     <div class="form-row full"><div class="form-group"><label>Spoluvlastnícky podiel</label><input type="text" name="${p}_podiel_${idx}" placeholder="1/1"></div></div></div>`);
 }
@@ -520,8 +519,8 @@ function addPozemok(listId){
 function addStavba(listId){
     const list=document.getElementById(listId||'stavbyList');const idx=counters.stavby++;const p=listId&&listId.includes('hist')?'hs':'s';const minH=listId&&listId.includes('hist')?'min="2001"':'min="0"';
     list.insertAdjacentHTML('beforeend',`<div class="dynamic-item"><div class="dynamic-item-header"><h4>Stavba č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
-    <div class="form-row"><div class="form-group"><label>LV č.</label><input type="text" name="${p}_lv_${idx}" placeholder=""></div><div class="form-group"><label>Obec</label><input type="text" name="${p}_obec_${idx}" placeholder=""></div></div>
-    <div class="form-row"><div class="form-group"><label>Katastrálne územie</label><input type="text" name="${p}_ku_${idx}" placeholder=""></div><div class="form-group"><label>Na pozemku parcelné č.</label><input type="text" name="${p}_parcela_${idx}" placeholder="" style="display:inline-block;width:60%"><select name="${p}_register_${idx}" style="display:inline-block;width:38%;margin-left:2%"><option value="C">register C</option><option value="E">register E</option></select></div></div>
+    <div class="form-row"><div class="form-group"><label>LV č.</label><input type="text" name="${p}_lv_${idx}" placeholder="1744"></div><div class="form-group"><label>Obec</label><input type="text" name="${p}_obec_${idx}" placeholder="Nitra"></div></div>
+    <div class="form-row"><div class="form-group"><label>Katastrálne územie</label><input type="text" name="${p}_ku_${idx}" placeholder="Nitra"></div><div class="form-group"><label>Na pozemku parcelné č.</label><input type="text" name="${p}_parcela_${idx}" placeholder="174/8" style="display:inline-block;width:60%"><select name="${p}_register_${idx}" style="display:inline-block;width:38%;margin-left:2%"><option value="C">register C</option><option value="E">register E</option></select></div></div>
     <div class="form-row three"><div class="form-group"><label>Súpisné č.</label><input type="text" name="${p}_supisne_${idx}" placeholder="44"></div><div class="form-group"><label>Orientačné č.</label><input type="text" name="${p}_orient_${idx}" placeholder="12"></div><div class="form-group"><label>Popis stavby</label><input type="text" name="${p}_popis_${idx}" placeholder="rodinný dom"></div></div>
     <div class="form-row"><div class="form-group"><label>Hodnota (€)</label><input type="number" ${minH} step="1" name="${p}_hodnota_${idx}" placeholder="120000"></div><div class="form-group"><label>Spoluvl. podiel</label><input type="text" name="${p}_podiel_${idx}" placeholder="1/1"></div></div></div>`);
 }
@@ -530,7 +529,7 @@ function addStavba(listId){
 function addByt(listId){
     const list=document.getElementById(listId||'bytyList');const idx=counters.byty++;const p=listId&&listId.includes('hist')?'hb':'b';const minH=listId&&listId.includes('hist')?'min="2001"':'min="0"';
     list.insertAdjacentHTML('beforeend',`<div class="dynamic-item"><div class="dynamic-item-header"><h4>Byt č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
-    <div class="form-row"><div class="form-group"><label>LV č.</label><input type="text" name="${p}_lv_${idx}" placeholder=""></div><div class="form-group"><label>Obec</label><input type="text" name="${p}_obec_${idx}" placeholder=""></div></div>
+    <div class="form-row"><div class="form-group"><label>LV č.</label><input type="text" name="${p}_lv_${idx}" placeholder="5544"></div><div class="form-group"><label>Obec</label><input type="text" name="${p}_obec_${idx}" placeholder="Nitra"></div></div>
     <div class="form-row"><div class="form-group"><label>Katastrálne územie</label><input type="text" name="${p}_ku_${idx}" placeholder="Chrenová"></div><div class="form-group"><label>Na pozemku parcelné č.</label><input type="text" name="${p}_parcela_${idx}" placeholder="1234/5" style="display:inline-block;width:60%"><select name="${p}_register_${idx}" style="display:inline-block;width:38%;margin-left:2%"><option value="C">register C</option><option value="E">register E</option></select></div></div>
     <div class="form-row three"><div class="form-group"><label>Vchod</label><input type="text" name="${p}_vchod_${idx}" placeholder="A"></div><div class="form-group"><label>Poschodie</label><input type="text" name="${p}_poschodie_${idx}" placeholder="4"></div><div class="form-group"><label>Číslo bytu</label><input type="text" name="${p}_cislo_${idx}" placeholder="66"></div></div>
     <div class="form-row"><div class="form-group"><label>Súpisné č.</label><input type="text" name="${p}_supisne_${idx}" placeholder="99"></div><div class="form-group"><label>Orientačné č.</label><input type="text" name="${p}_orient_${idx}" placeholder="15"></div></div>
@@ -543,10 +542,31 @@ function addByt(listId){
 // === HNUTEĽNÉ VECI ===
 function addHnutelna(listId){
     const list=document.getElementById(listId||'hnutelneList');const idx=counters.hnutelne++;const p=listId&&listId.includes('hist')?'hh':'h';const minH=listId&&listId.includes('hist')?'min="2001"':'min="0"';
-    list.insertAdjacentHTML('beforeend',`<div class="dynamic-item"><div class="dynamic-item-header"><h4>Hnuteľná vec č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
-    <div class="form-row full"><div class="form-group"><label>Popis</label><input type="text" name="${p}_popis_${idx}" placeholder="Audi A4 Avant, rok výroby 2015"></div></div>
-    <div class="form-row"><div class="form-group"><label>VIN / výrobné č.</label><input type="text" name="${p}_vin_${idx}" placeholder="WAUZZZ8K6FA123456"></div><div class="form-group"><label>ŠPZ / evidenčné č.</label><input type="text" name="${p}_spz_${idx}" placeholder="BA123AB"></div></div>
-    <div class="form-row"><div class="form-group"><label>Kde sa nachádza</label><input type="text" name="${p}_kde_${idx}" placeholder="Hlavná 1, 811 01 Bratislava"></div><div class="form-group"><label>Hodnota (€)</label><input type="number" ${minH} step="1" name="${p}_hodnota_${idx}" placeholder="12000"></div></div></div>`);
+    list.insertAdjacentHTML('beforeend',`<div class="dynamic-item" id="${p}_item_${idx}"><div class="dynamic-item-header"><h4>Hnuteľná vec č. ${idx+1}</h4><button type="button" class="btn-remove" onclick="this.closest('.dynamic-item').remove()">Odstrániť</button></div>
+    <div class="form-row full"><div class="form-group"><label>Typ hnuteľnej veci <span class="required">*</span></label><select name="${p}_typ_${idx}" onchange="toggleHnutelnaTyp(this,'${p}',${idx})" style="font-size:.88rem"><option value="">— vyberte —</option><option value="auto">🚗 Motorové vozidlo</option><option value="ine">📦 Iná hnuteľná vec (elektronika, nábytok, šperky...)</option></select></div></div>
+    <div id="${p}_fields_${idx}" style="display:none">
+    <div class="form-row full"><div class="form-group"><label>Popis <span class="required">*</span></label><input type="text" name="${p}_popis_${idx}" id="${p}_popis_${idx}"></div></div>
+    <div id="${p}_auto_${idx}" style="display:none">
+    <div class="form-row"><div class="form-group"><label>VIN (identifikačné číslo vozidla)</label><input type="text" name="${p}_vin_${idx}" placeholder="WAUZZZ8K6FA123456"></div><div class="form-group"><label>ŠPZ / evidenčné číslo</label><input type="text" name="${p}_spz_${idx}" placeholder="NR-123AB"></div></div></div>
+    <div id="${p}_ine_${idx}" style="display:none">
+    <div class="form-row"><div class="form-group"><label>Výrobné číslo (ak existuje)</label><input type="text" name="${p}_vin_${idx}_ine" placeholder="SN-20241234"></div><div class="form-group"><label>Evidenčné číslo (ak existuje)</label><input type="text" name="${p}_spz_${idx}_ine" placeholder="Inventárne č., sériové č."></div></div></div>
+    <div class="form-row"><div class="form-group"><label>Kde sa vec nachádza</label><input type="text" name="${p}_kde_${idx}" placeholder="Hlavná 1, 949 01 Nitra"></div><div class="form-group"><label>Hodnota (€)</label><input type="number" ${minH} step="1" name="${p}_hodnota_${idx}" placeholder="1500"></div></div>
+    </div></div>`);
+}
+function toggleHnutelnaTyp(sel,p,idx){
+    const fields=document.getElementById(p+'_fields_'+idx);
+    const autoF=document.getElementById(p+'_auto_'+idx);
+    const ineF=document.getElementById(p+'_ine_'+idx);
+    const popis=document.getElementById(p+'_popis_'+idx);
+    if(!sel.value){fields.style.display='none';return;}
+    fields.style.display='block';
+    if(sel.value==='auto'){
+        autoF.style.display='block';ineF.style.display='none';
+        popis.placeholder='Škoda Octavia Combi, rok výroby 2015, diesel';
+    } else {
+        autoF.style.display='none';ineF.style.display='block';
+        popis.placeholder='Napr. televízor Samsung 55", notebook Lenovo, práčka...';
+    }
 }
 
 // === ÚČTY ===
